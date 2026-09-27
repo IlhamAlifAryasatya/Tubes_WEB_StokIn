@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Retur Barang - StokIn</title>
+</head>
+<body>
+  <header>
+    <h1>StokIn</h1>
+  </header>
+
+  <nav aria-label="Navigasi utama">
+    <ul>
+      <li><a href="../../index.html">Dashboard</a></li>
+      <li><a href="../barang/katalog.html">Katalog</a></li>
+      <li><a href="masuk.html">Barang Masuk</a></li>
+      <li><a href="keluar.html">Barang Keluar</a></li>
+      <li><a href="retur.html" aria-current="page">Retur</a></li>
+      <li>Akun
+        <ul>
+          <li><a href="../akun/login.html">Masuk</a></li>
+          <li><a href="../akun/register.html">Daftar</a></li>
+          <li><a href="../akun/logout.html">Keluar</a></li>
+          <li><a href="../akun/profil.html">Profil Toko</a></li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
+
+  <main>
+    <article>
+      <h2>Retur Barang</h2>
+
+      <form action="#" method="post">
+        <p>
+          <label for="tanggal">Tanggal</label>
+          <input type="date" id="tanggal" name="tanggal" value="2026-09-27" required>
+        </p>
+        <p>
+          <label for="tipe">Jenis Retur</label>
+          <select id="tipe" name="tipe" required>
+            <option value="">Pilih jenis retur</option>
+            <option value="ke_supplier">Retur ke Supplier</option>
+            <option value="dari_pembeli">Retur dari Pembeli</option>
+          </select>
+        </p>
+        <p>
+          <label for="barang">Nama Barang</label>
+          <select id="barang" name="barang" required>
+            <option value="">Pilih barang</option>
+            <option value="BRG-001">Beras Premium 5 kg</option>
+            <option value="BRG-002">Minyak Goreng 1 L</option>
+            <option value="BRG-003">Gula Pasir 1 kg</option>
+            <option value="BRG-004">Telur Ayam 1 kg</option>
+            <option value="BRG-005">Sabun Mandi Batang</option>
+          </select>
+        </p>
+        <p>
+          <label for="jumlah">Jumlah</label>
+          <input type="number" id="jumlah" name="jumlah" min="1" value="1" required>
+        </p>
+        <p>
+          <label for="alasan">Alasan Retur</label>
+          <select id="alasan" name="alasan" required>
+            <option value="">Pilih alasan</option>
+            <option value="rusak">Barang rusak</option>
+            <option value="salah_kirim">Salah kirim</option>
+            <option value="tidak_sesuai">Tidak sesuai pesanan</option>
+            <option value="kadaluarsa">Kadaluarsa</option>
+          </select>
+        </p>
+        <p>
+          <label for="keterangan">Keterangan</label>
+          <textarea id="keterangan" name="keterangan" rows="3"></textarea>
+        </p>
+        <p>
+          <button type="submit">Simpan</button>
+          <a href="../../index.html">Batal</a>
+        </p>
+      </form>
+
+      <table border="1" cellpadding="4">
+        <caption>Riwayat retur barang</caption>
+        <thead>
+          <tr>
+            <th scope="col">Tanggal</th>
+            <th scope="col">Jenis Retur</th>
+            <th scope="col">Nama Barang</th>
+            <th scope="col">Jumlah</th>
+            <th scope="col">Alasan</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>26 Sep 2026</td>
+            <td>Retur ke Supplier</td>
+            <td>Minyak Goreng 1 L</td>
+            <td>2 Botol</td>
+            <td>Barang rusak</td>
+          </tr>
+          <tr>
+            <td>25 Sep 2026</td>
+            <td>Retur dari Pembeli</td>
+            <td>Beras Premium 5 kg</td>
+            <td>1 Karung</td>
+            <td>Tidak sesuai pesanan</td>
+          </tr>
+          <tr>
+            <td>24 Sep 2026</td>
+            <td>Retur ke Supplier</td>
+            <td>Gula Pasir 1 kg</td>
+            <td>3 Sak</td>
+            <td>Kadaluarsa</td>
+          </tr>
+        </tbody>
+      </table>
+    </article>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 StokIn. All rights reserved.</p>
+  </footer>
+</body>
+</html>

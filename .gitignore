@@ -1,0 +1,14 @@
+# Editor dan sistem operasi
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Environment dan log
+.env
+*.log
+
+# Berkas sementara
+*.tmp
+*.bak

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ubah Barang - StokIn</title>
+</head>
+<body>
+  <header>
+    <h1>StokIn</h1>
+  </header>
+
+  <nav aria-label="Navigasi utama">
+    <ul>
+      <li><a href="../../index.html">Dashboard</a></li>
+      <li><a href="katalog.html">Katalog</a></li>
+      <li><a href="../transaksi/masuk.html">Barang Masuk</a></li>
+      <li><a href="../transaksi/keluar.html">Barang Keluar</a></li>
+      <li><a href="../transaksi/retur.html">Retur</a></li>
+      <li>Akun
+        <ul>
+          <li><a href="../akun/login.html">Masuk</a></li>
+          <li><a href="../akun/register.html">Daftar</a></li>
+          <li><a href="../akun/logout.html">Keluar</a></li>
+          <li><a href="../akun/profil.html">Profil Toko</a></li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
+
+  <main>
+    <article>
+      <h2>Ubah Barang</h2>
+
+      <form action="#" method="post">
+        <p>
+          <label for="kode">Kode Barang</label>
+          <input type="text" id="kode" name="kode" value="BRG-001" readonly>
+        </p>
+        <p>
+          <label for="nama">Nama Barang</label>
+          <input type="text" id="nama" name="nama" value="Beras Premium 5 kg" required>
+        </p>
+        <p>
+          <label for="kategori">Kategori</label>
+          <select id="kategori" name="kategori" required>
+            <option value="sembako" selected>Sembako</option>
+            <option value="minuman">Minuman</option>
+            <option value="perawatan">Perawatan</option>
+          </select>
+        </p>
+        <p>
+          <label for="satuan">Satuan</label>
+          <select id="satuan" name="satuan" required>
+            <option value="karung" selected>Karung</option>
+            <option value="botol">Botol</option>
+            <option value="sak">Sak</option>
+            <option value="rak">Rak</option>
+            <option value="sachet">Sachet</option>
+            <option value="batang">Batang</option>
+          </select>
+        </p>
+        <p>
+          <label for="stok">Stok</label>
+          <input type="number" id="stok" name="stok" min="0" value="48" readonly>
+        </p>
+        <p>
+          <label for="harga">Harga</label>
+          <input type="number" id="harga" name="harga" min="0" value="75000" required>
+        </p>
+        <p>
+          <label for="catatan">Catatan</label>
+          <textarea id="catatan" name="catatan" rows="3">Kemasan karung 5 kg</textarea>
+        </p>
+        <p>
+          <label for="status">Status</label>
+          <select id="status" name="status" required>
+            <option value="aktif" selected>Aktif</option>
+            <option value="nonaktif">Nonaktif</option>
+          </select>
+        </p>
+        <p>
+          <label for="foto">Ganti Foto Barang</label>
+          <input type="file" id="foto" name="foto" accept="image/*">
+        </p>
+        <p>
+          <button type="submit">Simpan</button>
+          <a href="katalog.html">Batal</a>
+        </p>
+      </form>
+    </article>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 StokIn. All rights reserved.</p>
+  </footer>
+</body>
+</html>
