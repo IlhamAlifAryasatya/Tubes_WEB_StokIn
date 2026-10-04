@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dashboard Stok - StokIn</title>
+  <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
   <header>
@@ -32,27 +33,29 @@
     <article>
       <h2>Dashboard Stok</h2>
 
-      <table border="1" cellpadding="4">
-        <caption>Ringkasan kondisi stok</caption>
-        <tbody>
-          <tr>
-            <th scope="row">Jenis barang aktif</th>
-            <td>5</td>
-          </tr>
-          <tr>
-            <th scope="row">Barang nonaktif</th>
-            <td>1</td>
-          </tr>
-          <tr>
-            <th scope="row">Total nilai stok</th>
-            <td>Rp4.896.000</td>
-          </tr>
-          <tr>
-            <th scope="row">Barang menipis</th>
-            <td>2</td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="kartu-ringkasan">
+        <table>
+          <caption>Ringkasan kondisi stok</caption>
+          <tbody>
+            <tr>
+              <th scope="row">Jenis barang aktif</th>
+              <td>5</td>
+            </tr>
+            <tr>
+              <th scope="row">Barang nonaktif</th>
+              <td>1</td>
+            </tr>
+            <tr>
+              <th scope="row">Total nilai stok</th>
+              <td>Rp4.896.000</td>
+            </tr>
+            <tr>
+              <th scope="row">Barang menipis</th>
+              <td>2</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
       <form action="pages/barang/katalog.html" method="get">
         <p>
@@ -73,31 +76,33 @@
         </p>
       </form>
 
-      <table border="1" cellpadding="4">
-        <caption>Barang yang perlu segera ditambah</caption>
-        <thead>
-          <tr>
-            <th scope="col">Kode</th>
-            <th scope="col">Nama Barang</th>
-            <th scope="col">Sisa Stok</th>
-            <th scope="col">Aksi</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>BRG-003</td>
-            <td>Gula Pasir 1 kg</td>
-            <td>6 Sak</td>
-            <td><a href="pages/transaksi/masuk.html">Catat Barang Masuk</a></td>
-          </tr>
-          <tr>
-            <td>BRG-004</td>
-            <td>Telur Ayam 1 kg</td>
-            <td>8 Rak</td>
-            <td><a href="pages/transaksi/masuk.html">Catat Barang Masuk</a></td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="tabel">
+        <table>
+          <caption>Barang yang perlu segera ditambah</caption>
+          <thead>
+            <tr>
+              <th scope="col">Kode</th>
+              <th scope="col">Nama Barang</th>
+              <th scope="col">Sisa Stok</th>
+              <th scope="col">Aksi</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>BRG-003</td>
+              <td>Gula Pasir 1 kg</td>
+              <td><span class="menipis">6 Sak</span></td>
+              <td><a href="pages/transaksi/masuk.html">Catat Barang Masuk</a></td>
+            </tr>
+            <tr>
+              <td>BRG-004</td>
+              <td>Telur Ayam 1 kg</td>
+              <td><span class="menipis">8 Rak</span></td>
+              <td><a href="pages/transaksi/masuk.html">Catat Barang Masuk</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </article>
   </main>
 

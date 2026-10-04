@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Detail Barang - StokIn</title>
+  <link rel="stylesheet" href="../../assets/css/style.css">
 </head>
 <body>
   <header>
@@ -29,42 +30,44 @@
   </nav>
 
   <main>
-    <article>
+    <article class="detail">
       <h2>Beras Premium 5 kg</h2>
 
       <img src="../../assets/img/beras.jpg" alt="Beras premium kemasan 5 kg" width="200" height="200">
 
-      <table border="1" cellpadding="4">
-        <caption>Spesifikasi barang</caption>
-        <tbody>
-          <tr>
-            <th scope="row">Kode</th>
-            <td>BRG-001</td>
-          </tr>
-          <tr>
-            <th scope="row">Kategori</th>
-            <td>Sembako</td>
-          </tr>
-          <tr>
-            <th scope="row">Satuan</th>
-            <td>Karung</td>
-          </tr>
-          <tr>
-            <th scope="row">Sisa stok</th>
-            <td>48 Karung</td>
-          </tr>
-          <tr>
-            <th scope="row">Harga</th>
-            <td>Rp75.000</td>
-          </tr>
-          <tr>
-            <th scope="row">Status</th>
-            <td>Aktif</td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="tabel">
+        <table>
+          <caption>Spesifikasi barang</caption>
+          <tbody>
+            <tr>
+              <th scope="row">Kode</th>
+              <td>BRG-001</td>
+            </tr>
+            <tr>
+              <th scope="row">Kategori</th>
+              <td>Sembako</td>
+            </tr>
+            <tr>
+              <th scope="row">Satuan</th>
+              <td>Karung</td>
+            </tr>
+            <tr>
+              <th scope="row">Sisa stok</th>
+              <td>48 Karung</td>
+            </tr>
+            <tr>
+              <th scope="row">Harga</th>
+              <td>Rp75.000</td>
+            </tr>
+            <tr>
+              <th scope="row">Status</th>
+              <td><span class="status aktif">Aktif</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
-      <p><a href="ubah.html">Ubah Barang</a></p>
+      <p><a href="ubah.html" class="tombol">Ubah Barang</a></p>
     </article>
   </main>
 
