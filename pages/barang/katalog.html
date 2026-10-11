@@ -4,168 +4,192 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Katalog Barang - StokIn</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
   <link rel="stylesheet" href="../../assets/css/style.css">
 </head>
-<body>
-  <header>
-    <h1>StokIn</h1>
+<body class="d-flex flex-column min-vh-100">
+  <header class="navbar sticky-top bg-white border-bottom px-3">
+    <h1 class="navbar-brand logo d-flex align-items-center gap-2 fw-bold mb-0">StokIn</h1>
+    <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebar" aria-controls="sidebar" aria-label="Buka menu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
   </header>
 
-  <nav aria-label="Navigasi utama">
-    <ul>
-      <li><a href="../../index.html">Dashboard</a></li>
-      <li><a href="katalog.html" aria-current="page">Katalog</a></li>
-      <li><a href="../transaksi/masuk.html">Barang Masuk</a></li>
-      <li><a href="../transaksi/keluar.html">Barang Keluar</a></li>
-      <li><a href="../transaksi/retur.html">Retur</a></li>
-      <li>Akun
-        <ul>
-          <li><a href="../akun/login.html">Masuk</a></li>
-          <li><a href="../akun/register.html">Daftar</a></li>
-          <li><a href="../akun/logout.html">Keluar</a></li>
-          <li><a href="../akun/profil.html">Profil Toko</a></li>
+  <div class="d-flex flex-grow-1">
+    <nav class="sidebar offcanvas-lg offcanvas-start" id="sidebar" tabindex="-1" aria-label="Navigasi utama">
+      <div class="offcanvas-header border-bottom">
+        <p class="offcanvas-title fw-bold mb-0">Menu</p>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#sidebar" aria-label="Tutup menu"></button>
+      </div>
+      <div class="offcanvas-body p-3">
+        <ul class="nav nav-pills flex-column w-100">
+          <li class="nav-item"><a class="nav-link" href="../../index.html">Dashboard</a></li>
+          <li class="nav-item"><a class="nav-link active" aria-current="page" href="katalog.html">Katalog</a></li>
+          <li class="nav-item"><a class="nav-link" href="../transaksi/masuk.html">Barang Masuk</a></li>
+          <li class="nav-item"><a class="nav-link" href="../transaksi/keluar.html">Barang Keluar</a></li>
+          <li class="nav-item"><a class="nav-link" href="../transaksi/retur.html">Retur</a></li>
+          <li class="nav-item mt-3">
+            <span class="small text-uppercase fw-semibold text-body-secondary px-3">Akun</span>
+            <ul class="nav nav-pills flex-column mt-1">
+              <li class="nav-item"><a class="nav-link" href="../akun/login.html">Masuk</a></li>
+              <li class="nav-item"><a class="nav-link" href="../akun/register.html">Daftar</a></li>
+              <li class="nav-item"><a class="nav-link" href="../akun/logout.html">Keluar</a></li>
+              <li class="nav-item"><a class="nav-link" href="../akun/profil.html">Profil Toko</a></li>
+            </ul>
+          </li>
         </ul>
-      </li>
-    </ul>
-  </nav>
-
-  <main>
-    <article>
-      <h2>Katalog Barang</h2>
-
-      <form action="katalog.html" method="get">
-        <p>
-          <label for="cari">Cari barang</label>
-          <input type="search" id="cari" name="cari">
-        </p>
-        <p>
-          <button type="submit">Cari</button>
-        </p>
-      </form>
-
-      <p><a href="tambah.html" class="tombol">Tambah Barang</a></p>
-
-      <ul class="tab-kategori">
-        <li><a href="katalog.html" aria-current="page">Semua</a></li>
-        <li><a href="katalog.html?kategori=sembako">Sembako</a></li>
-        <li><a href="katalog.html?kategori=minuman">Minuman</a></li>
-        <li><a href="katalog.html?kategori=perawatan">Perawatan</a></li>
-      </ul>
-
-      <div class="tabel">
-        <table>
-          <caption>Daftar barang yang dijual</caption>
-          <thead>
-            <tr>
-              <th scope="col">Kode</th>
-              <th scope="col">Nama Barang</th>
-              <th scope="col">Kategori</th>
-              <th scope="col">Satuan</th>
-              <th scope="col">Stok</th>
-              <th scope="col">Harga</th>
-              <th scope="col">Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>BRG-001</td>
-              <td>
-                <img src="../../assets/img/beras.jpg" alt="Beras premium kemasan 5 kg" width="60" height="60">
-                <a href="detail.html">Beras Premium 5 kg</a>
-              </td>
-              <td>Sembako</td>
-              <td>Karung</td>
-              <td>48</td>
-              <td>Rp75.000</td>
-              <td><span class="status aktif">Aktif</span></td>
-            </tr>
-            <tr>
-              <td>BRG-002</td>
-              <td>
-                <img src="../../assets/img/minyak.jpg" alt="Minyak goreng kemasan 1 liter" width="60" height="60">
-                <a href="detail.html">Minyak Goreng 1 L</a>
-              </td>
-              <td>Sembako</td>
-              <td>Botol</td>
-              <td>12</td>
-              <td>Rp19.500</td>
-              <td><span class="status aktif">Aktif</span></td>
-            </tr>
-            <tr>
-              <td>BRG-003</td>
-              <td>
-                <img src="../../assets/img/gula.jpg" alt="Gula pasir kemasan 1 kilogram" width="60" height="60">
-                <a href="detail.html">Gula Pasir 1 kg</a>
-              </td>
-              <td>Sembako</td>
-              <td>Sak</td>
-              <td>6</td>
-              <td>Rp17.000</td>
-              <td><span class="status aktif">Aktif</span></td>
-            </tr>
-            <tr>
-              <td>BRG-004</td>
-              <td>
-                <img src="../../assets/img/telur.jpg" alt="Telur ayam kemasan 1 kilogram" width="60" height="60">
-                <a href="detail.html">Telur Ayam 1 kg</a>
-              </td>
-              <td>Sembako</td>
-              <td>Rak</td>
-              <td>8</td>
-              <td>Rp30.000</td>
-              <td><span class="status aktif">Aktif</span></td>
-            </tr>
-            <tr>
-              <td>BRG-005</td>
-              <td>
-                <img src="../../assets/img/sabun.jpg" alt="Sabun mandi batang" width="60" height="60">
-                <a href="detail.html">Sabun Mandi Batang</a>
-              </td>
-              <td>Perawatan</td>
-              <td>Batang</td>
-              <td>120</td>
-              <td>Rp6.000</td>
-              <td><span class="status aktif">Aktif</span></td>
-            </tr>
-          </tbody>
-        </table>
       </div>
+    </nav>
 
-      <div class="tabel">
-        <table>
-          <caption>Barang nonaktif (tidak dijual)</caption>
-          <thead>
-            <tr>
-              <th scope="col">Kode</th>
-              <th scope="col">Nama Barang</th>
-              <th scope="col">Kategori</th>
-              <th scope="col">Satuan</th>
-              <th scope="col">Sisa Stok</th>
-              <th scope="col">Harga</th>
-              <th scope="col">Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>BRG-006</td>
-              <td>
-                <img src="../../assets/img/kopi.jpg" alt="Kopi bubuk kemasan 250 gram" width="60" height="60">
-                <a href="detail.html">Kopi Bubuk 250 g</a>
-              </td>
-              <td>Minuman</td>
-              <td>Sachet</td>
-              <td>64</td>
-              <td>Rp26.000</td>
-              <td><span class="status nonaktif">Nonaktif</span></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </article>
-  </main>
+    <div class="konten flex-grow-1 d-flex flex-column">
+      <main class="container-fluid flex-grow-1 p-3 p-lg-4">
+        <article>
+          <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-4">
+            <h2 class="fs-3 fw-bold mb-0">Katalog Barang</h2>
+            <a href="tambah.html" class="btn btn-primary rounded-pill">Tambah Barang</a>
+          </div>
 
-  <footer>
-    <p>&copy; 2026 StokIn. All rights reserved.</p>
-  </footer>
+          <div class="card card-body mb-3">
+            <form action="katalog.html" method="get" class="row g-2 align-items-end">
+              <div class="col">
+                <label for="cari" class="form-label">Cari barang</label>
+                <input type="search" id="cari" name="cari" class="form-control">
+              </div>
+              <div class="col-auto">
+                <button type="submit" class="btn btn-primary rounded-pill px-4">Cari</button>
+              </div>
+            </form>
+          </div>
+
+          <ul class="nav nav-pills small mb-3">
+            <li class="nav-item"><a class="nav-link rounded-pill px-2 px-sm-3 active" aria-current="page" href="katalog.html">Semua</a></li>
+            <li class="nav-item"><a class="nav-link rounded-pill px-2 px-sm-3" href="katalog.html?kategori=sembako">Sembako</a></li>
+            <li class="nav-item"><a class="nav-link rounded-pill px-2 px-sm-3" href="katalog.html?kategori=minuman">Minuman</a></li>
+            <li class="nav-item"><a class="nav-link rounded-pill px-2 px-sm-3" href="katalog.html?kategori=perawatan">Perawatan</a></li>
+          </ul>
+
+          <div class="card card-body mb-3">
+            <div class="table-responsive">
+              <table class="table caption-top align-middle mb-0">
+                <caption>Daftar barang yang dijual</caption>
+                <thead class="table-light">
+                  <tr>
+                    <th scope="col" class="d-none d-md-table-cell">Kode</th>
+                    <th scope="col">Nama Barang</th>
+                    <th scope="col" class="d-none d-md-table-cell">Kategori</th>
+                    <th scope="col" class="d-none d-md-table-cell">Satuan</th>
+                    <th scope="col">Stok</th>
+                    <th scope="col">Harga</th>
+                    <th scope="col">Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="d-none d-md-table-cell">BRG-001</td>
+                    <td>
+                      <img src="../../assets/img/beras.jpg" alt="Beras premium kemasan 5 kg" width="40" height="40" class="rounded-3 object-fit-cover me-2 d-none d-md-inline">
+                      <a href="detail.html" class="link-body-emphasis fw-semibold text-decoration-none">Beras Premium 5 kg</a>
+                    </td>
+                    <td class="d-none d-md-table-cell">Sembako</td>
+                    <td class="d-none d-md-table-cell">Karung</td>
+                    <td>48</td>
+                    <td>Rp75.000</td>
+                    <td><span class="badge rounded-pill bg-success-subtle text-success-emphasis">Aktif</span></td>
+                  </tr>
+                  <tr>
+                    <td class="d-none d-md-table-cell">BRG-002</td>
+                    <td>
+                      <img src="../../assets/img/minyak.jpg" alt="Minyak goreng kemasan 1 liter" width="40" height="40" class="rounded-3 object-fit-cover me-2 d-none d-md-inline">
+                      <a href="detail.html" class="link-body-emphasis fw-semibold text-decoration-none">Minyak Goreng 1 L</a>
+                    </td>
+                    <td class="d-none d-md-table-cell">Sembako</td>
+                    <td class="d-none d-md-table-cell">Botol</td>
+                    <td>12</td>
+                    <td>Rp19.500</td>
+                    <td><span class="badge rounded-pill bg-success-subtle text-success-emphasis">Aktif</span></td>
+                  </tr>
+                  <tr>
+                    <td class="d-none d-md-table-cell">BRG-003</td>
+                    <td>
+                      <img src="../../assets/img/gula.jpg" alt="Gula pasir kemasan 1 kilogram" width="40" height="40" class="rounded-3 object-fit-cover me-2 d-none d-md-inline">
+                      <a href="detail.html" class="link-body-emphasis fw-semibold text-decoration-none">Gula Pasir 1 kg</a>
+                    </td>
+                    <td class="d-none d-md-table-cell">Sembako</td>
+                    <td class="d-none d-md-table-cell">Sak</td>
+                    <td>6</td>
+                    <td>Rp17.000</td>
+                    <td><span class="badge rounded-pill bg-success-subtle text-success-emphasis">Aktif</span></td>
+                  </tr>
+                  <tr>
+                    <td class="d-none d-md-table-cell">BRG-004</td>
+                    <td>
+                      <img src="../../assets/img/telur.jpg" alt="Telur ayam kemasan 1 kilogram" width="40" height="40" class="rounded-3 object-fit-cover me-2 d-none d-md-inline">
+                      <a href="detail.html" class="link-body-emphasis fw-semibold text-decoration-none">Telur Ayam 1 kg</a>
+                    </td>
+                    <td class="d-none d-md-table-cell">Sembako</td>
+                    <td class="d-none d-md-table-cell">Rak</td>
+                    <td>8</td>
+                    <td>Rp30.000</td>
+                    <td><span class="badge rounded-pill bg-success-subtle text-success-emphasis">Aktif</span></td>
+                  </tr>
+                  <tr>
+                    <td class="d-none d-md-table-cell">BRG-005</td>
+                    <td>
+                      <img src="../../assets/img/sabun.jpg" alt="Sabun mandi batang" width="40" height="40" class="rounded-3 object-fit-cover me-2 d-none d-md-inline">
+                      <a href="detail.html" class="link-body-emphasis fw-semibold text-decoration-none">Sabun Mandi Batang</a>
+                    </td>
+                    <td class="d-none d-md-table-cell">Perawatan</td>
+                    <td class="d-none d-md-table-cell">Batang</td>
+                    <td>120</td>
+                    <td>Rp6.000</td>
+                    <td><span class="badge rounded-pill bg-success-subtle text-success-emphasis">Aktif</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="card card-body mb-3">
+            <div class="table-responsive">
+              <table class="table caption-top align-middle mb-0">
+                <caption>Barang nonaktif (tidak dijual)</caption>
+                <thead class="table-light">
+                  <tr>
+                    <th scope="col" class="d-none d-md-table-cell">Kode</th>
+                    <th scope="col">Nama Barang</th>
+                    <th scope="col" class="d-none d-md-table-cell">Kategori</th>
+                    <th scope="col" class="d-none d-md-table-cell">Satuan</th>
+                    <th scope="col">Sisa Stok</th>
+                    <th scope="col">Harga</th>
+                    <th scope="col">Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="d-none d-md-table-cell">BRG-006</td>
+                    <td>
+                      <img src="../../assets/img/kopi.jpg" alt="Kopi bubuk kemasan 250 gram" width="40" height="40" class="rounded-3 object-fit-cover me-2 d-none d-md-inline">
+                      <a href="detail.html" class="link-body-emphasis fw-semibold text-decoration-none">Kopi Bubuk 250 g</a>
+                    </td>
+                    <td class="d-none d-md-table-cell">Minuman</td>
+                    <td class="d-none d-md-table-cell">Sachet</td>
+                    <td>64</td>
+                    <td>Rp26.000</td>
+                    <td><span class="badge rounded-pill bg-secondary-subtle text-secondary-emphasis">Nonaktif</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </article>
+      </main>
+
+      <footer class="text-center small text-body-secondary py-3">
+        <p class="mb-0">&copy; 2026 StokIn. All rights reserved.</p>
+      </footer>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>
