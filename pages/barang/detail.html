@@ -44,13 +44,13 @@
     <div class="konten flex-grow-1 d-flex flex-column">
       <main class="container-fluid flex-grow-1 p-3 p-lg-4">
         <article>
-          <h2 class="fs-3 fw-bold mb-4">Beras Premium 5 kg</h2>
+          <h2 id="detail-nama" class="fs-3 fw-bold mb-4">Beras Premium 5 kg</h2>
 
           <div class="card card-body">
             <div class="row g-4">
               <div class="col-8 col-sm-6 col-md-4 col-lg-3">
                 <div class="ratio ratio-1x1">
-                  <img src="../../assets/img/beras.jpg" alt="Beras premium kemasan 5 kg" class="rounded-3 object-fit-cover">
+                  <img id="detail-foto" src="../../assets/img/beras.jpg" alt="Beras premium kemasan 5 kg" class="rounded-3 object-fit-cover">
                 </div>
               </div>
 
@@ -61,33 +61,33 @@
                     <tbody>
                       <tr>
                         <th scope="row">Kode</th>
-                        <td>BRG-001</td>
+                        <td id="detail-kode">BRG-001</td>
                       </tr>
                       <tr>
                         <th scope="row">Kategori</th>
-                        <td>Sembako</td>
+                        <td id="detail-kategori">Sembako</td>
                       </tr>
                       <tr>
                         <th scope="row">Satuan</th>
-                        <td>Karung</td>
+                        <td id="detail-satuan">Karung</td>
                       </tr>
                       <tr>
                         <th scope="row">Sisa stok</th>
-                        <td>48 Karung</td>
+                        <td id="detail-stok">48 Karung</td>
                       </tr>
                       <tr>
                         <th scope="row">Harga</th>
-                        <td>Rp75.000</td>
+                        <td id="detail-harga">Rp75.000</td>
                       </tr>
                       <tr>
                         <th scope="row">Status</th>
-                        <td><span class="badge rounded-pill bg-success-subtle text-success-emphasis">Aktif</span></td>
+                        <td id="detail-status"><span class="badge rounded-pill bg-success-subtle text-success-emphasis">Aktif</span></td>
                       </tr>
                     </tbody>
                   </table>
                 </div>
 
-                <a href="ubah.html" class="btn btn-primary rounded-pill mt-3">Ubah Barang</a>
+                <a id="tombol-ubah" href="ubah.html" class="btn btn-primary rounded-pill mt-3">Ubah Barang</a>
               </div>
             </div>
           </div>
@@ -100,6 +100,8 @@
     </div>
   </div>
 
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js" integrity="sha384-1H217gwSVyLSIfaLxHbE7dRb3v4mYCKbpQvzx0cegeju1MVsGrX5xXxAvs/HgeFs" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  <script src="../../assets/js/script.js"></script>
 </body>
 </html>

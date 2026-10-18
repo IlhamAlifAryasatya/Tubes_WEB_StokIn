@@ -39,6 +39,25 @@ komponen offcanvas dipakai untuk sidebar yang di HP berubah menjadi menu geser.
 Bootstrap cukup dipasang lewat CDN tanpa proses build, sehingga nanti tetap mudah digabungkan
 dengan backend apa pun pada tahap fullstack.
 
+## Interaktivitas (JavaScript dan jQuery)
+
+Semua script ada di `assets/js/script.js`, jQuery 3.7.1 dipasang lewat CDN. Data barang dan
+riwayat transaksi masih dummy (array of object di script) dan kembali seperti semula saat
+halaman dimuat ulang.
+
+- **Dashboard**: jumlah barang aktif, nonaktif, total nilai stok, dan daftar barang menipis
+  dihitung dari data barang, bukan ditulis manual.
+- **Katalog**: tabel dibuat dari data barang. Tab kategori dan kolom cari langsung menyaring
+  tabel tanpa pindah halaman.
+- **Barang masuk, keluar, retur**: pilihan barang dan riwayat dibuat dari data. Sisa stok
+  muncul saat barang dipilih. Form dicek dulu sebelum disimpan (field kosong, jumlah keluar
+  tidak boleh melebihi stok), lalu baris baru masuk ke riwayat dan stok ikut berubah.
+- **Detail dan ubah barang**: isi halaman mengikuti barang yang diklik di katalog.
+- **Tambah barang**: kode barang yang sudah dipakai ditolak.
+- **Akun dan profil**: field kosong ditandai merah dan muncul pesan sebelum form dikirim.
+
+Video demo: [Google Drive](https://drive.google.com/drive/folders/10Toa-VzURZfGi9Dbw-c8WXXpqIK1EUlS?usp=sharing)
+
 ## Screenshot
 
 Screenshot setiap tahap ada di folder `docs/screenshots`:
@@ -46,3 +65,4 @@ Screenshot setiap tahap ada di folder `docs/screenshots`:
 - `minggu-2` : struktur HTML tanpa CSS
 - `minggu-3` : styling dengan CSS native (desktop dan mobile)
 - `minggu-4` : kerangka tampilan dengan Bootstrap (desktop dan mobile)
+- `minggu-5` : sebelum dan sesudah interaksi JavaScript/jQuery

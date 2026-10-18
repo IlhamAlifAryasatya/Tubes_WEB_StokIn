@@ -97,3 +97,39 @@ caption {
   color: #1f1f1f;
   font-weight: 600;
 }
+
+/* dua tabel di katalog (dijual dan nonaktif) diberi lebar kolom yang sama
+   supaya kolomnya sejajar.
+   HP: hanya Nama Barang, Stok, Harga, dan Status yang tampil,
+   padding sel dikecilkan supaya keempat kolom muat di layar 375px */
+@media (max-width: 767.98px) {
+  .tabel-katalog th,
+  .tabel-katalog td {
+    padding-left: 0.3rem;
+    padding-right: 0.3rem;
+  }
+  .tabel-katalog th:nth-child(2) { width: 27%; }
+  .tabel-katalog th:nth-child(5) { width: 16%; }
+  .tabel-katalog th:nth-child(6) { width: 30%; }
+  .tabel-katalog th:nth-child(7) { width: 27%; }
+}
+
+/* laptop: semua kolom tampil, lebar kolom dikunci dengan table-layout: fixed */
+@media (min-width: 768px) {
+  .tabel-katalog {
+    table-layout: fixed;
+  }
+  .tabel-katalog th:nth-child(1) { width: 12%; } /* Kode */
+  .tabel-katalog th:nth-child(2) { width: 30%; } /* Nama Barang */
+  .tabel-katalog th:nth-child(3) { width: 13%; } /* Kategori */
+  .tabel-katalog th:nth-child(4) { width: 11%; } /* Satuan */
+  .tabel-katalog th:nth-child(5) { width: 9%; }  /* Stok */
+  .tabel-katalog th:nth-child(6) { width: 13%; } /* Harga */
+  .tabel-katalog th:nth-child(7) { width: 12%; } /* Status */
+}
+
+/* ===== Elemen yang dimunculkan lewat jQuery ===== */
+/* awalnya disembunyikan, lalu ditampilkan dengan slideDown()/fadeIn() */
+.tersembunyi {
+  display: none;
+}

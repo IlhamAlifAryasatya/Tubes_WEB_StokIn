@@ -50,7 +50,7 @@
           </div>
 
           <div class="card card-body mb-3">
-            <form action="katalog.html" method="get" class="row g-2 align-items-end">
+            <form id="form-cari" action="katalog.html" method="get" class="row g-2 align-items-end">
               <div class="col">
                 <label for="cari" class="form-label">Cari barang</label>
                 <input type="search" id="cari" name="cari" class="form-control">
@@ -61,16 +61,16 @@
             </form>
           </div>
 
-          <ul class="nav nav-pills small mb-3">
-            <li class="nav-item"><a class="nav-link rounded-pill px-2 px-sm-3 active" aria-current="page" href="katalog.html">Semua</a></li>
-            <li class="nav-item"><a class="nav-link rounded-pill px-2 px-sm-3" href="katalog.html?kategori=sembako">Sembako</a></li>
-            <li class="nav-item"><a class="nav-link rounded-pill px-2 px-sm-3" href="katalog.html?kategori=minuman">Minuman</a></li>
-            <li class="nav-item"><a class="nav-link rounded-pill px-2 px-sm-3" href="katalog.html?kategori=perawatan">Perawatan</a></li>
+          <ul id="tab-kategori" class="nav nav-pills small mb-3">
+            <li class="nav-item"><a class="nav-link rounded-pill px-2 px-sm-3 active" aria-current="page" data-kategori="" href="katalog.html">Semua</a></li>
+            <li class="nav-item"><a class="nav-link rounded-pill px-2 px-sm-3" data-kategori="sembako" href="katalog.html?kategori=sembako">Sembako</a></li>
+            <li class="nav-item"><a class="nav-link rounded-pill px-2 px-sm-3" data-kategori="minuman" href="katalog.html?kategori=minuman">Minuman</a></li>
+            <li class="nav-item"><a class="nav-link rounded-pill px-2 px-sm-3" data-kategori="perawatan" href="katalog.html?kategori=perawatan">Perawatan</a></li>
           </ul>
 
           <div class="card card-body mb-3">
             <div class="table-responsive">
-              <table class="table caption-top align-middle mb-0">
+              <table id="tabel-aktif" class="tabel-katalog table caption-top align-middle mb-0">
                 <caption>Daftar barang yang dijual</caption>
                 <thead class="table-light">
                   <tr>
@@ -84,66 +84,6 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td class="d-none d-md-table-cell">BRG-001</td>
-                    <td>
-                      <img src="../../assets/img/beras.jpg" alt="Beras premium kemasan 5 kg" width="40" height="40" class="rounded-3 object-fit-cover me-2 d-none d-md-inline">
-                      <a href="detail.html" class="link-body-emphasis fw-semibold text-decoration-none">Beras Premium 5 kg</a>
-                    </td>
-                    <td class="d-none d-md-table-cell">Sembako</td>
-                    <td class="d-none d-md-table-cell">Karung</td>
-                    <td>48</td>
-                    <td>Rp75.000</td>
-                    <td><span class="badge rounded-pill bg-success-subtle text-success-emphasis">Aktif</span></td>
-                  </tr>
-                  <tr>
-                    <td class="d-none d-md-table-cell">BRG-002</td>
-                    <td>
-                      <img src="../../assets/img/minyak.jpg" alt="Minyak goreng kemasan 1 liter" width="40" height="40" class="rounded-3 object-fit-cover me-2 d-none d-md-inline">
-                      <a href="detail.html" class="link-body-emphasis fw-semibold text-decoration-none">Minyak Goreng 1 L</a>
-                    </td>
-                    <td class="d-none d-md-table-cell">Sembako</td>
-                    <td class="d-none d-md-table-cell">Botol</td>
-                    <td>12</td>
-                    <td>Rp19.500</td>
-                    <td><span class="badge rounded-pill bg-success-subtle text-success-emphasis">Aktif</span></td>
-                  </tr>
-                  <tr>
-                    <td class="d-none d-md-table-cell">BRG-003</td>
-                    <td>
-                      <img src="../../assets/img/gula.jpg" alt="Gula pasir kemasan 1 kilogram" width="40" height="40" class="rounded-3 object-fit-cover me-2 d-none d-md-inline">
-                      <a href="detail.html" class="link-body-emphasis fw-semibold text-decoration-none">Gula Pasir 1 kg</a>
-                    </td>
-                    <td class="d-none d-md-table-cell">Sembako</td>
-                    <td class="d-none d-md-table-cell">Sak</td>
-                    <td>6</td>
-                    <td>Rp17.000</td>
-                    <td><span class="badge rounded-pill bg-success-subtle text-success-emphasis">Aktif</span></td>
-                  </tr>
-                  <tr>
-                    <td class="d-none d-md-table-cell">BRG-004</td>
-                    <td>
-                      <img src="../../assets/img/telur.jpg" alt="Telur ayam kemasan 1 kilogram" width="40" height="40" class="rounded-3 object-fit-cover me-2 d-none d-md-inline">
-                      <a href="detail.html" class="link-body-emphasis fw-semibold text-decoration-none">Telur Ayam 1 kg</a>
-                    </td>
-                    <td class="d-none d-md-table-cell">Sembako</td>
-                    <td class="d-none d-md-table-cell">Rak</td>
-                    <td>8</td>
-                    <td>Rp30.000</td>
-                    <td><span class="badge rounded-pill bg-success-subtle text-success-emphasis">Aktif</span></td>
-                  </tr>
-                  <tr>
-                    <td class="d-none d-md-table-cell">BRG-005</td>
-                    <td>
-                      <img src="../../assets/img/sabun.jpg" alt="Sabun mandi batang" width="40" height="40" class="rounded-3 object-fit-cover me-2 d-none d-md-inline">
-                      <a href="detail.html" class="link-body-emphasis fw-semibold text-decoration-none">Sabun Mandi Batang</a>
-                    </td>
-                    <td class="d-none d-md-table-cell">Perawatan</td>
-                    <td class="d-none d-md-table-cell">Batang</td>
-                    <td>120</td>
-                    <td>Rp6.000</td>
-                    <td><span class="badge rounded-pill bg-success-subtle text-success-emphasis">Aktif</span></td>
-                  </tr>
                 </tbody>
               </table>
             </div>
@@ -151,7 +91,7 @@
 
           <div class="card card-body mb-3">
             <div class="table-responsive">
-              <table class="table caption-top align-middle mb-0">
+              <table id="tabel-nonaktif" class="tabel-katalog table caption-top align-middle mb-0">
                 <caption>Barang nonaktif (tidak dijual)</caption>
                 <thead class="table-light">
                   <tr>
@@ -159,24 +99,12 @@
                     <th scope="col">Nama Barang</th>
                     <th scope="col" class="d-none d-md-table-cell">Kategori</th>
                     <th scope="col" class="d-none d-md-table-cell">Satuan</th>
-                    <th scope="col">Sisa Stok</th>
+                    <th scope="col">Stok</th>
                     <th scope="col">Harga</th>
                     <th scope="col">Status</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td class="d-none d-md-table-cell">BRG-006</td>
-                    <td>
-                      <img src="../../assets/img/kopi.jpg" alt="Kopi bubuk kemasan 250 gram" width="40" height="40" class="rounded-3 object-fit-cover me-2 d-none d-md-inline">
-                      <a href="detail.html" class="link-body-emphasis fw-semibold text-decoration-none">Kopi Bubuk 250 g</a>
-                    </td>
-                    <td class="d-none d-md-table-cell">Minuman</td>
-                    <td class="d-none d-md-table-cell">Sachet</td>
-                    <td>64</td>
-                    <td>Rp26.000</td>
-                    <td><span class="badge rounded-pill bg-secondary-subtle text-secondary-emphasis">Nonaktif</span></td>
-                  </tr>
                 </tbody>
               </table>
             </div>
@@ -190,6 +118,8 @@
     </div>
   </div>
 
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js" integrity="sha384-1H217gwSVyLSIfaLxHbE7dRb3v4mYCKbpQvzx0cegeju1MVsGrX5xXxAvs/HgeFs" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  <script src="../../assets/js/script.js"></script>
 </body>
 </html>
