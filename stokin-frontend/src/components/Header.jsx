@@ -7,6 +7,7 @@ function Header({ namaToko }) {
           <a href="#ringkasan" className="link-secondary text-decoration-none">Ringkasan</a>
           <a href="#tambah-barang" className="link-secondary text-decoration-none">Tambah Barang</a>
           <a href="#daftar-barang" className="link-secondary text-decoration-none">Daftar Barang</a>
+          <a href="#produk-pemasok" className="link-secondary text-decoration-none">Pemasok</a>
         </nav>
         <span className="small text-body-secondary d-none d-md-inline">{namaToko}</span>
       </div>

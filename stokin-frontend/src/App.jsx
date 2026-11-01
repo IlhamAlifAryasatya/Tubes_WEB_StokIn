@@ -3,6 +3,7 @@ import Header from "./components/Header";
 import RingkasanStok from "./components/RingkasanStok";
 import FormTambahBarang from "./components/FormTambahBarang";
 import DaftarBarang from "./components/DaftarBarang";
+import ProdukPemasok from "./components/ProdukPemasok";
 import Footer from "./components/Footer";
 import dataBarang from "./data/dataBarang";
 
@@ -38,6 +39,8 @@ function App() {
             <DaftarBarang daftarBarang={daftarBarang} onHapus={hapusBarang} />
           </div>
         </div>
+
+        <ProdukPemasok />
       </main>
 
       <Footer />

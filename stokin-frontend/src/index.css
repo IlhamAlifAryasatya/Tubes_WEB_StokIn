@@ -52,3 +52,9 @@ body {
   flex-shrink: 0;
   font-size: 0.7rem;
 }
+
+.foto-pemasok {
+  aspect-ratio: 1 / 1;
+  object-fit: contain;
+  background-color: #faf9f7;
+}
