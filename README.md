@@ -58,6 +58,17 @@ halaman dimuat ulang.
 
 Video demo: [Google Drive](https://drive.google.com/drive/folders/10Toa-VzURZfGi9Dbw-c8WXXpqIK1EUlS?usp=sharing)
 
+## Backend NestJS (Minggu 9)
+
+Backend dibuat dengan NestJS untuk data **Barang** (resource `barang`, CRUD, data disimpan di
+array). Jalankan dengan `npm install` lalu `npm run start:dev`, kemudian buka
+http://localhost:3000. Request untuk REST Client ada di `barang.http`.
+
+Screenshot di `docs/screenshots/minggu-9/`:
+
+- `01`–`08` : pengujian endpoint dengan REST Client (GET, POST, PATCH, DELETE, error 404, 409, 400)
+- `09`–`18` : alur tambah, ubah, dan hapus barang dari tampilan StokIn
+
 ## Screenshot
 
 Screenshot setiap tahap ada di folder `docs/screenshots`:
@@ -66,3 +77,4 @@ Screenshot setiap tahap ada di folder `docs/screenshots`:
 - `minggu-3` : styling dengan CSS native (desktop dan mobile)
 - `minggu-4` : kerangka tampilan dengan Bootstrap (desktop dan mobile)
 - `minggu-5` : sebelum dan sesudah interaksi JavaScript/jQuery
+- `minggu-9` : backend NestJS diuji dengan REST Client, lalu disambung ke tampilan StokIn

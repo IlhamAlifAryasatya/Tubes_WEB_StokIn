@@ -12,3 +12,9 @@ desktop.ini
 # Berkas sementara
 *.tmp
 *.bak
+
+# NestJS
+node_modules/
+dist/
+coverage/
+*.tsbuildinfo

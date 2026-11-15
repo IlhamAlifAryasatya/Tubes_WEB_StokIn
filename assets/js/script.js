@@ -1,19 +1,15 @@
 /* StokIn - interaksi sisi client.
-   Data masih dummy: disimpan di array dan kembali seperti semula
+   Data barang diambil dan disimpan lewat API NestJS (/api/barang).
+   Riwayat transaksi masih dummy di array dan kembali seperti semula
    setiap halaman dimuat ulang. */
 
-// ===== Data dummy =====
-
+const URL_API = "/api/barang";
 const BATAS_MENIPIS = 10; // stok di bawah angka ini ditandai menipis
 
-const daftarBarang = [
-  { kode: "BRG-001", nama: "Beras Premium 5 kg", kategori: "Sembako", satuan: "Karung", stok: 48, harga: 75000, aktif: true, foto: "beras.jpg", alt: "Beras premium kemasan 5 kg", catatan: "Kemasan karung 5 kg" },
-  { kode: "BRG-002", nama: "Minyak Goreng 1 L", kategori: "Sembako", satuan: "Botol", stok: 12, harga: 19500, aktif: true, foto: "minyak.jpg", alt: "Minyak goreng kemasan 1 liter", catatan: "" },
-  { kode: "BRG-003", nama: "Gula Pasir 1 kg", kategori: "Sembako", satuan: "Sak", stok: 6, harga: 17000, aktif: true, foto: "gula.jpg", alt: "Gula pasir kemasan 1 kilogram", catatan: "" },
-  { kode: "BRG-004", nama: "Telur Ayam 1 kg", kategori: "Sembako", satuan: "Rak", stok: 8, harga: 30000, aktif: true, foto: "telur.jpg", alt: "Telur ayam kemasan 1 kilogram", catatan: "" },
-  { kode: "BRG-005", nama: "Sabun Mandi Batang", kategori: "Perawatan", satuan: "Batang", stok: 120, harga: 6000, aktif: true, foto: "sabun.jpg", alt: "Sabun mandi batang", catatan: "" },
-  { kode: "BRG-006", nama: "Kopi Bubuk 250 g", kategori: "Minuman", satuan: "Sachet", stok: 64, harga: 26000, aktif: false, foto: "kopi.jpg", alt: "Kopi bubuk kemasan 250 gram", catatan: "" }
-];
+// diisi dari GET /api/barang saat halaman dibuka
+let daftarBarang = [];
+
+// ===== Data dummy riwayat transaksi =====
 
 const riwayatMasuk = [
   { tanggal: "2026-09-27", kode: "BRG-001", jumlah: 20, hargaBeli: 72000, keterangan: "Pembelian bulanan" },
@@ -34,6 +30,27 @@ const riwayatRetur = [
   { tanggal: "2026-09-25", jenis: "Retur dari Pembeli", kode: "BRG-001", jumlah: 1, alasan: "Tidak sesuai pesanan" },
   { tanggal: "2026-09-24", jenis: "Retur ke Supplier", kode: "BRG-003", jumlah: 3, alasan: "Kadaluarsa" }
 ];
+
+// ===== Request ke API =====
+
+// kirim data JSON ke backend (POST, PATCH, DELETE)
+function kirimKeApi(method, url, data) {
+  return $.ajax({
+    url: url,
+    method: method,
+    contentType: "application/json",
+    data: data ? JSON.stringify(data) : undefined
+  });
+}
+
+// pesan error dari NestJS bisa berupa teks atau array (hasil validasi DTO)
+function pesanErrorApi(xhr) {
+  if (xhr.responseJSON && xhr.responseJSON.message) {
+    const pesan = xhr.responseJSON.message;
+    return Array.isArray(pesan) ? pesan.join(", ") : pesan;
+  }
+  return "Server StokIn tidak bisa dihubungi.";
+}
 
 // ===== Fungsi pengolah data =====
 
@@ -101,6 +118,11 @@ function barisKosong(jumlahKolom, teks) {
 // ===== Pesan dan validasi form =====
 
 function tampilkanPesan(jenis, teks) {
+  // halaman tanpa #pesan (dashboard, katalog, detail) dibuatkan kotak pesan di atas isi halaman
+  if ($("#pesan").length === 0) {
+    $("main article").children().first().after('<div id="pesan" class="alert small py-2 tersembunyi" role="alert"></div>');
+  }
+
   $("#pesan")
     .stop(true, true)
     .removeClass("alert-success alert-danger")
@@ -160,10 +182,16 @@ function tampilkanKatalog() {
   let barisNonaktif = "";
 
   for (const barang of hasil) {
+    // barang baru dari form tambah belum punya foto
+    let foto = "";
+    if (barang.foto) {
+      foto = `<img src="../../assets/img/${barang.foto}" alt="${barang.alt}" width="40" height="40" class="rounded-3 object-fit-cover me-2 d-none d-md-inline">`;
+    }
+
     const baris = `<tr>
       <td class="d-none d-md-table-cell">${barang.kode}</td>
       <td>
-        <img src="../../assets/img/${barang.foto}" alt="${barang.alt}" width="40" height="40" class="rounded-3 object-fit-cover me-2 d-none d-md-inline">
+        ${foto}
         <a href="detail.html?kode=${barang.kode}" class="link-body-emphasis fw-semibold text-decoration-none">${barang.nama}</a>
       </td>
       <td class="d-none d-md-table-cell">${barang.kategori}</td>
@@ -198,18 +226,19 @@ function pilihKategori(kategori) {
 
 // ===== Detail dan ubah barang =====
 
-// barang yang dibuka diambil dari alamat, misalnya detail.html?kode=BRG-003
-function barangDariAlamat() {
-  const kode = new URLSearchParams(window.location.search).get("kode");
-  return cariBarang(kode) || daftarBarang[0];
+// kode barang diambil dari alamat, misalnya detail.html?kode=BRG-003
+function kodeDariAlamat() {
+  return new URLSearchParams(window.location.search).get("kode") || "BRG-001";
 }
 
-function tampilkanDetail() {
-  const barang = barangDariAlamat();
-
+function tampilkanDetail(barang) {
   document.title = barang.nama + " - StokIn";
   $("#detail-nama").text(barang.nama);
-  $("#detail-foto").attr({ src: "../../assets/img/" + barang.foto, alt: barang.alt });
+  if (barang.foto) {
+    $("#detail-foto").attr({ src: "../../assets/img/" + barang.foto, alt: barang.alt });
+  } else {
+    $("#detail-foto").parent().html('<div class="rounded-3 bg-body-secondary text-body-secondary d-flex align-items-center justify-content-center">Belum ada foto</div>');
+  }
   $("#detail-kode").text(barang.kode);
   $("#detail-kategori").text(barang.kategori);
   $("#detail-satuan").text(barang.satuan);
@@ -219,9 +248,7 @@ function tampilkanDetail() {
   $("#tombol-ubah").attr("href", "ubah.html?kode=" + barang.kode);
 }
 
-function isiFormUbah() {
-  const barang = barangDariAlamat();
-
+function isiFormUbah(barang) {
   $("#kode").val(barang.kode);
   $("#nama").val(barang.nama);
   $("#kategori").val(barang.kategori.toLowerCase());
@@ -247,36 +274,43 @@ function isiPilihanBarang() {
 function tampilkanRiwayat(jenis) {
   let baris = "";
 
+  // barang yang sudah dihapus tetap tampil di riwayat dengan kodenya saja
+  function namaBarang(kode) {
+    const barang = cariBarang(kode);
+    return barang ? barang.nama : kode;
+  }
+  function satuanBarang(kode) {
+    const barang = cariBarang(kode);
+    return barang ? barang.satuan : "";
+  }
+
   if (jenis === "masuk") {
     for (const data of riwayatMasuk) {
-      const barang = cariBarang(data.kode);
       baris += `<tr>
         <td>${formatTanggal(data.tanggal)}</td>
-        <td>${barang.nama}</td>
-        <td>${data.jumlah} ${barang.satuan}</td>
+        <td>${namaBarang(data.kode)}</td>
+        <td>${data.jumlah} ${satuanBarang(data.kode)}</td>
         <td>${formatRupiah(data.hargaBeli)}</td>
         <td class="d-none d-md-table-cell">${data.keterangan}</td>
       </tr>`;
     }
   } else if (jenis === "keluar") {
     for (const data of riwayatKeluar) {
-      const barang = cariBarang(data.kode);
       baris += `<tr>
         <td>${formatTanggal(data.tanggal)}</td>
-        <td>${barang.nama}</td>
-        <td>${data.jumlah} ${barang.satuan}</td>
+        <td>${namaBarang(data.kode)}</td>
+        <td>${data.jumlah} ${satuanBarang(data.kode)}</td>
         <td>${data.alasan}</td>
         <td class="d-none d-md-table-cell">${data.penerima}</td>
       </tr>`;
     }
   } else {
     for (const data of riwayatRetur) {
-      const barang = cariBarang(data.kode);
       baris += `<tr>
         <td>${formatTanggal(data.tanggal)}</td>
         <td>${data.jenis}</td>
-        <td>${barang.nama}</td>
-        <td>${data.jumlah} ${barang.satuan}</td>
+        <td>${namaBarang(data.kode)}</td>
+        <td>${data.jumlah} ${satuanBarang(data.kode)}</td>
         <td class="d-none d-md-table-cell">${data.alasan}</td>
       </tr>`;
     }
@@ -333,6 +367,135 @@ function simpanTransaksi(form) {
 // ===== Event handling =====
 
 $(function () {
+  // dashboard, katalog, dan transaksi butuh semua data barang
+  if ($("#tabel-menipis, #tabel-aktif, #form-transaksi").length > 0) {
+    $.getJSON(URL_API)
+      .done(function (data) {
+        daftarBarang = data;
+        mulaiHalaman();
+      })
+      .fail(function (xhr) {
+        tampilkanPesan("danger", pesanErrorApi(xhr));
+      });
+  }
+
+  // detail dan ubah cukup mengambil satu barang
+  if ($("#detail-nama, #form-ubah").length > 0) {
+    $.getJSON(URL_API + "/" + kodeDariAlamat())
+      .done(function (barang) {
+        if ($("#detail-nama").length > 0) {
+          tampilkanDetail(barang);
+        } else {
+          isiFormUbah(barang);
+        }
+      })
+      .fail(function (xhr) {
+        tampilkanPesan("danger", pesanErrorApi(xhr));
+        $("#form-ubah button[type=submit], #tombol-ubah, #tombol-hapus").addClass("disabled").prop("disabled", true);
+      });
+  }
+
+  // hapus barang dari halaman detail
+  $("#tombol-hapus").on("click", function () {
+    const kode = $("#detail-kode").text();
+    if (!confirm(`Hapus ${$("#detail-nama").text()} (${kode})?`)) {
+      return;
+    }
+
+    kirimKeApi("DELETE", URL_API + "/" + kode)
+      .done(function (barang) {
+        window.location.href = "katalog.html?dihapus=" + encodeURIComponent(barang.nama);
+      })
+      .fail(function (xhr) {
+        tampilkanPesan("danger", pesanErrorApi(xhr));
+      });
+  });
+
+  // tambah barang
+  $("#form-tambah").on("submit", function (e) {
+    e.preventDefault();
+    const form = this;
+    const kosong = cekFieldKosong($(this));
+    if (kosong.length > 0) {
+      tampilkanPesan("danger", "Lengkapi dulu: " + kosong.join(", ") + ".");
+      return;
+    }
+
+    const barangBaru = {
+      kode: $("#kode").val().trim().toUpperCase(),
+      nama: $("#nama").val().trim(),
+      kategori: $("#kategori option:selected").text(),
+      satuan: $("#satuan option:selected").text(),
+      stok: Number($("#stok").val()),
+      harga: Number($("#harga").val()),
+      catatan: $("#catatan").val().trim()
+    };
+
+    // kode dobel, nama dobel, dan format data dicek oleh backend
+    kirimKeApi("POST", URL_API, barangBaru)
+      .done(function (hasil) {
+        tampilkanPesan("success", `${hasil.nama} (${hasil.kode}) ditambahkan ke katalog.`);
+        form.reset();
+      })
+      .fail(function (xhr) {
+        tampilkanPesan("danger", pesanErrorApi(xhr));
+      });
+  });
+
+  // ubah barang
+  $("#form-ubah").on("submit", function (e) {
+    e.preventDefault();
+    const kosong = cekFieldKosong($(this));
+    if (kosong.length > 0) {
+      tampilkanPesan("danger", "Lengkapi dulu: " + kosong.join(", ") + ".");
+      return;
+    }
+
+    const perubahan = {
+      nama: $("#nama").val().trim(),
+      kategori: $("#kategori option:selected").text(),
+      satuan: $("#satuan option:selected").text(),
+      harga: Number($("#harga").val()),
+      catatan: $("#catatan").val().trim(),
+      aktif: $("#status").val() === "aktif"
+    };
+
+    kirimKeApi("PATCH", URL_API + "/" + $("#kode").val(), perubahan)
+      .done(function (barang) {
+        tampilkanPesan("success", `Perubahan ${barang.nama} disimpan.`);
+      })
+      .fail(function (xhr) {
+        tampilkanPesan("danger", pesanErrorApi(xhr));
+      });
+  });
+
+  // form akun dan profil: cukup dicek kosong atau tidak, lalu pindah halaman bila perlu
+  $(".form-cek").on("submit", function (e) {
+    e.preventDefault();
+    const form = $(this);
+    const kosong = cekFieldKosong(form);
+    if (kosong.length > 0) {
+      tampilkanPesan("danger", "Lengkapi dulu: " + kosong.join(", ") + ".");
+      return;
+    }
+
+    tampilkanPesan("success", form.data("berhasil"));
+    const tujuan = form.data("tujuan");
+    if (tujuan) {
+      setTimeout(function () {
+        window.location.href = tujuan;
+      }, 1200);
+    }
+  });
+
+  // tanda merah hilang begitu field diisi
+  $("form").on("input change", ".is-invalid", function () {
+    $(this).removeClass("is-invalid");
+  });
+});
+
+// dijalankan setelah data barang dari API diterima
+function mulaiHalaman() {
   // dashboard
   if ($("#tabel-menipis").length > 0) {
     tampilkanDashboard();
@@ -345,6 +508,11 @@ $(function () {
     $("#cari").val(alamat.get("cari") || "");
     pilihKategori(alamat.get("kategori") || "");
     tampilkanKatalog();
+
+    // setelah hapus barang di halaman detail
+    if (alamat.get("dihapus")) {
+      tampilkanPesan("success", `${alamat.get("dihapus")} dihapus dari katalog.`);
+    }
 
     $("#cari").on("input", tampilkanKatalog);
 
@@ -359,14 +527,6 @@ $(function () {
       tampilkanKatalog();
       $("#tabel-aktif tbody, #tabel-nonaktif tbody").hide().fadeIn(300);
     });
-  }
-
-  // detail dan ubah barang
-  if ($("#detail-nama").length > 0) {
-    tampilkanDetail();
-  }
-  if ($("#form-ubah").length > 0) {
-    isiFormUbah();
   }
 
   // transaksi
@@ -401,77 +561,4 @@ $(function () {
       simpanTransaksi($(this));
     });
   }
-
-  // tambah barang
-  $("#form-tambah").on("submit", function (e) {
-    e.preventDefault();
-    const kosong = cekFieldKosong($(this));
-    if (kosong.length > 0) {
-      tampilkanPesan("danger", "Lengkapi dulu: " + kosong.join(", ") + ".");
-      return;
-    }
-
-    const kode = $("#kode").val().trim().toUpperCase();
-    const barangLama = cariBarang(kode);
-    if (barangLama) {
-      $("#kode").addClass("is-invalid");
-      tampilkanPesan("danger", `Kode ${kode} sudah dipakai ${barangLama.nama}.`);
-      return;
-    }
-
-    daftarBarang.push({
-      kode: kode,
-      nama: $("#nama").val().trim(),
-      kategori: $("#kategori option:selected").text(),
-      satuan: $("#satuan option:selected").text(),
-      stok: Number($("#stok").val()),
-      harga: Number($("#harga").val()),
-      aktif: true,
-      foto: "",
-      alt: "",
-      catatan: $("#catatan").val().trim()
-    });
-    tampilkanPesan("success", `${$("#nama").val().trim()} ditambahkan ke katalog.`);
-    this.reset();
-  });
-
-  // ubah barang
-  $("#form-ubah").on("submit", function (e) {
-    e.preventDefault();
-    const kosong = cekFieldKosong($(this));
-    if (kosong.length > 0) {
-      tampilkanPesan("danger", "Lengkapi dulu: " + kosong.join(", ") + ".");
-      return;
-    }
-
-    const barang = cariBarang($("#kode").val());
-    barang.nama = $("#nama").val().trim();
-    barang.harga = Number($("#harga").val());
-    barang.aktif = $("#status").val() === "aktif";
-    tampilkanPesan("success", `Perubahan ${barang.nama} disimpan.`);
-  });
-
-  // form akun dan profil: cukup dicek kosong atau tidak, lalu pindah halaman bila perlu
-  $(".form-cek").on("submit", function (e) {
-    e.preventDefault();
-    const form = $(this);
-    const kosong = cekFieldKosong(form);
-    if (kosong.length > 0) {
-      tampilkanPesan("danger", "Lengkapi dulu: " + kosong.join(", ") + ".");
-      return;
-    }
-
-    tampilkanPesan("success", form.data("berhasil"));
-    const tujuan = form.data("tujuan");
-    if (tujuan) {
-      setTimeout(function () {
-        window.location.href = tujuan;
-      }, 1200);
-    }
-  });
-
-  // tanda merah hilang begitu field diisi
-  $("form").on("input change", ".is-invalid", function () {
-    $(this).removeClass("is-invalid");
-  });
-});
+}

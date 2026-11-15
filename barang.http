@@ -1,0 +1,62 @@
+@host = http://localhost:3000/api
+
+### 1. GET semua barang
+GET {{host}}/barang
+
+### 2. GET satu barang
+GET {{host}}/barang/BRG-002
+
+### 3. POST tambah barang
+POST {{host}}/barang
+Content-Type: application/json
+
+{
+  "kode": "BRG-007",
+  "nama": "Tepung Terigu 1 kg",
+  "kategori": "Sembako",
+  "satuan": "Sak",
+  "stok": 25,
+  "harga": 13000,
+  "catatan": "Merek Segitiga Biru"
+}
+
+### 4. PATCH ubah stok dan harga
+PATCH {{host}}/barang/BRG-007
+Content-Type: application/json
+
+{
+  "stok": 40,
+  "harga": 13500
+}
+
+### 5. DELETE hapus barang
+DELETE {{host}}/barang/BRG-007
+
+### 6. Error 404: barang tidak ditemukan
+GET {{host}}/barang/BRG-099
+
+### 7. Error 409: kode barang sudah dipakai
+POST {{host}}/barang
+Content-Type: application/json
+
+{
+  "kode": "BRG-003",
+  "nama": "Gula Aren 500 g",
+  "kategori": "Sembako",
+  "satuan": "Sak",
+  "stok": 10,
+  "harga": 21000
+}
+
+### 8. Error 400: validasi DTO gagal
+POST {{host}}/barang
+Content-Type: application/json
+
+{
+  "kode": "brg7",
+  "nama": "Te",
+  "kategori": "Elektronik",
+  "satuan": "Kg",
+  "stok": -5,
+  "harga": 50
+}
