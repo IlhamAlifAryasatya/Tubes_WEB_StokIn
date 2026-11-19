@@ -60,3 +60,6 @@ Content-Type: application/json
   "stok": -5,
   "harga": 50
 }
+
+### 9. GET ringkasan jumlah barang (count + where)
+GET {{host}}/barang/ringkasan

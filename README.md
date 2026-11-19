@@ -69,6 +69,29 @@ Screenshot di `docs/screenshots/minggu-9/`:
 - `01`–`08` : pengujian endpoint dengan REST Client (GET, POST, PATCH, DELETE, error 404, 409, 400)
 - `09`–`18` : alur tambah, ubah, dan hapus barang dari tampilan StokIn
 
+## Database PostgreSQL dengan Prisma (Minggu 10)
+
+Data barang sekarang disimpan di PostgreSQL (database `stokin`, tabel `barang`) lewat Prisma ORM,
+jadi tetap ada setelah server dinyalakan ulang. Model ada di `prisma/schema.prisma`,
+`PrismaService` di `src/prisma/`, dan `BarangService` memakai Prisma Client menggantikan array.
+Endpoint tambahan `GET /api/barang/ringkasan` menghitung barang aktif, nonaktif, dan menipis
+(`count` + `where`).
+
+Cara menjalankan:
+
+1. Buat database `stokin` di PostgreSQL lokal.
+2. Buat file `.env` berisi
+   `DATABASE_URL="postgresql://postgres:PASSWORD@localhost:5432/stokin?schema=public"`.
+3. `npm install`, lalu `npx prisma migrate dev`, `npx prisma generate`, dan `npx prisma db seed`.
+4. `npm run start:dev`, kemudian buka http://localhost:3000.
+
+Screenshot di `docs/screenshots/minggu-10/`:
+
+- `01`–`06` : membuat database, schema Prisma, migrasi, generate + seed, tabel di PostgreSQL
+- `07`–`08` : `PrismaService` dan `BarangService` yang memakai Prisma
+- `09`–`15` : CRUD dengan REST Client, server dinyalakan ulang, data tetap ada, endpoint ringkasan
+- `16`–`21` : tampilan desktop dan mobile (dashboard, katalog, tambah, ubah, detail, hapus)
+
 ## Screenshot
 
 Screenshot setiap tahap ada di folder `docs/screenshots`:
@@ -78,3 +101,4 @@ Screenshot setiap tahap ada di folder `docs/screenshots`:
 - `minggu-4` : kerangka tampilan dengan Bootstrap (desktop dan mobile)
 - `minggu-5` : sebelum dan sesudah interaksi JavaScript/jQuery
 - `minggu-9` : backend NestJS diuji dengan REST Client, lalu disambung ke tampilan StokIn
+- `minggu-10` : data barang disimpan di PostgreSQL dengan Prisma, tampilan desktop dan mobile

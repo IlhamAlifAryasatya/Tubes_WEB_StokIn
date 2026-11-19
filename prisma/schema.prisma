@@ -1,0 +1,26 @@
+generator client {
+  provider     = "prisma-client"
+  output       = "../src/generated/prisma"
+  moduleFormat = "esm"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// Data barang di katalog StokIn, kode dipakai sebagai kunci (BRG-001, BRG-002, ...)
+model Barang {
+  kode       String   @id @db.VarChar(10)
+  nama       String   @db.VarChar(100)
+  kategori   String   @db.VarChar(30)
+  satuan     String   @db.VarChar(20)
+  stok       Int      @default(0)
+  harga      Int
+  aktif      Boolean  @default(true)
+  foto       String   @default("")
+  alt        String   @default("")
+  catatan    String   @default("") @db.VarChar(200)
+  diperbarui DateTime @updatedAt
+
+  @@map("barang")
+}

@@ -17,6 +17,11 @@ export class BarangController {
     return this.barangService.findAll();
   }
 
+  @Get('ringkasan')
+  ringkasan() {
+    return this.barangService.ringkasan();
+  }
+
   @Get(':kode')
   findOne(@Param('kode') kode: string) {
     return this.barangService.findOne(kode);

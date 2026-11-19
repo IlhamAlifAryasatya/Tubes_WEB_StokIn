@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication, ValidationPipe } from '@nestjs/common';
 import request from 'supertest';
@@ -17,21 +18,26 @@ describe('Barang (e2e)', () => {
     await app.init();
   });
 
-  it('GET /barang mengembalikan 6 barang awal', async () => {
+  it('GET /barang mengambil data dari database', async () => {
     const res = await request(app.getHttpServer()).get('/barang').expect(200);
-    expect(res.body).toHaveLength(6);
+    expect(res.body.length).toBeGreaterThan(0);
+  });
+
+  it('GET /barang/ringkasan menghitung barang', async () => {
+    const res = await request(app.getHttpServer()).get('/barang/ringkasan').expect(200);
+    expect(res.body).toHaveProperty('menipis');
   });
 
   it('POST, PATCH, DELETE /barang', async () => {
     const server = app.getHttpServer();
-    const baru = { kode: 'BRG-007', nama: 'Tepung Terigu 1 kg', kategori: 'Sembako', satuan: 'Sak', stok: 25, harga: 13000 };
+    const baru = { kode: 'BRG-999', nama: 'Tepung Terigu 1 kg', kategori: 'Sembako', satuan: 'Sak', stok: 25, harga: 13000 };
 
     await request(server).post('/barang').send(baru).expect(201);
     await request(server).post('/barang').send(baru).expect(409);
-    const ubah = await request(server).patch('/barang/BRG-007').send({ stok: 40 }).expect(200);
+    const ubah = await request(server).patch('/barang/BRG-999').send({ stok: 40 }).expect(200);
     expect(ubah.body.stok).toBe(40);
-    await request(server).delete('/barang/BRG-007').expect(200);
-    await request(server).get('/barang/BRG-007').expect(404);
+    await request(server).delete('/barang/BRG-999').expect(200);
+    await request(server).get('/barang/BRG-999').expect(404);
   });
 
   it('POST /barang menolak data tidak valid', async () => {
